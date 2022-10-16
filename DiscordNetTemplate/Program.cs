@@ -2,13 +2,13 @@
 using Discord.Addons.Hosting;
 using Discord.Commands;
 using Discord.WebSocket;
-using DiscordNetTemplate.Services;
+using MuslimBot.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace DiscordNetTemplate
+namespace MuslimBot
 {
     class Program
     {

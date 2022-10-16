@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DiscordNetTemplate
+namespace MuslimBot
 {
     class RandomStuff
     {

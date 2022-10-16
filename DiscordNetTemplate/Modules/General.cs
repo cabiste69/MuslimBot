@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DiscordNetTemplate.Modules
+namespace MuslimBot.Modules
 {
     public class General : ModuleBase<SocketCommandContext>
     {
