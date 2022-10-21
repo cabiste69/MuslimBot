@@ -50,6 +50,7 @@ namespace MuslimBot
                 .ConfigureServices((context, services) =>
                 {
                     services.AddHostedService<CommandHandler>();
+                    services.AddSingleton<IPrayer, Prayer>();
                 })
                 .UseConsoleLifetime();
 
