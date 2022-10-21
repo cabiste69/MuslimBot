@@ -2,12 +2,12 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0-focal AS build
 WORKDIR /source
 COPY . .
-RUN dotnet restore "./MemeDistributor/MemeDistributor.csproj" --disable-parallel
-RUN dotnet publish "./MemeDistributor/MemeDistributor.csproj" -c release -o /app --no-restore
+RUN dotnet restore "./MuslimBot/MuslimBot.csproj" --disable-parallel
+RUN dotnet publish "./MuslimBot/MuslimBot.csproj" -c release -o /app --no-restore
 
 # Serve Stage
 FROM mcr.microsoft.com/dotnet/aspnet:6.0-focal
 WORKDIR /app
 COPY --from=build /app ./
 
-ENTRYPOINT ["dotnet", "MemeDistributor.dll"]
+ENTRYPOINT ["dotnet", "MuslimBot.dll"]
