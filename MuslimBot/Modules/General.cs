@@ -12,8 +12,6 @@ namespace MuslimBot.Modules
             _prayerTime = prayerTime;
         }
 
-        [Command("ping ss")]
-        [Alias("p")]
         public async Task PingAsync()
         {
             await Context.Channel.TriggerTypingAsync();
@@ -38,7 +36,7 @@ namespace MuslimBot.Modules
 
             if (response == null)
             {
-                await ReplyAsync("for some reason the response is null 🤔");
+                await ReplyAsync("for some reason the response is null 🤔 \n did you type the correct state name?");
                 return;
             }
 

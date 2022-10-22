@@ -47,8 +47,8 @@ namespace MuslimBot.Services
         private (int stateId, int delegationId) FindIds(string state)
         {
             // default to the capital
-            int stateId = 342; 
-            int delegationId = 615;
+            int stateId = 0; 
+            int delegationId = 0;
             for (int i = 0; i < 24; i++)
             {
                 if (_states[i].NameEn.ToUpper() == state.ToUpper())
