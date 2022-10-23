@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace MuslimBot.Services
 {
-    public class CommandHandler : DiscordClientService
+    public sealed class CommandHandler : DiscordClientService
     {
         private readonly IServiceProvider _provider;
         private readonly CommandService _service;
@@ -34,13 +34,22 @@ namespace MuslimBot.Services
             if (!(arg is SocketUserMessage message)) return;
             if (message.Source != MessageSource.User) return;
 
+            // Console.WriteLine(message.Content);
+
             var argPos = 0;
-            Console.WriteLine(message.Content);
             if (!message.HasStringPrefix(_config["prefix"], ref argPos) && !message.HasMentionPrefix(Client.CurrentUser, ref argPos)) return;
+
+            if(message.Author.Id == 326497071731310592)
+            {
+                Random random = new();
+                if (random.Next(10) == 2)
+                {
+                    await message.ReplyAsync("fuck you nasro");
+                }
+            }
 
             var context = new SocketCommandContext(Client, message);
             await _service.ExecuteAsync(context, argPos, _provider);
-            
         }
 
         private async Task OnCommandExecuted(Optional<CommandInfo> command, ICommandContext context, IResult result)

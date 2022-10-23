@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace MuslimBot
 {
-    class Program
+    sealed class Program
     {
         static async Task Main()
         {
@@ -33,10 +33,10 @@ namespace MuslimBot
                 {
                     config.SocketConfig = new DiscordSocketConfig
                     {
-                        LogLevel = LogSeverity.Debug,
+                        LogLevel = LogSeverity.Verbose,
                         AlwaysDownloadUsers = false,
                         MessageCacheSize = 200,
-                        GatewayIntents = GatewayIntents.All
+                        GatewayIntents = GatewayIntents.GuildMessages | GatewayIntents.GuildMessageTyping | GatewayIntents.MessageContent | GatewayIntents.Guilds 
                     };
 
                     config.Token = context.Configuration["Token"];
@@ -44,7 +44,7 @@ namespace MuslimBot
                 .UseCommandService((context, config) =>
                 {
                     config.CaseSensitiveCommands = false;
-                    config.LogLevel = LogSeverity.Debug;
+                    config.LogLevel = LogSeverity.Verbose;
                     config.DefaultRunMode = RunMode.Sync;
                 })
                 .ConfigureServices((context, services) =>

@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace MuslimBot.Services
 {
-    public class Prayer : IPrayer
+    public sealed class Prayer : IPrayer
     {
         private readonly RestClient _client;
         private readonly List<StateModel>? _states;
@@ -53,12 +53,23 @@ namespace MuslimBot.Services
             {
                 if (_states[i].NameEn.ToUpper() == state.ToUpper())
                 {
+                    //Console.WriteLine(_states[i].Delegations.Count);
                     stateId = _states[i].Id;
-                    delegationId = _states[i].Delegations.Find(x => x.NameEn == _states[i].NameEn).Id;
+                    delegationId = _states[i].Delegations.Find(x => x.NameEn.ToUpper() == _states[i].NameEn.ToUpper()).Id;
                     break;
                 }
             }
             return (stateId, delegationId);
+        }
+
+        public List<EmbedFieldBuilder> GetStates()
+        {
+            List<EmbedFieldBuilder> states = new(24);
+            for (int i = 0; i < 24; i++)
+            {
+                states.Add(new EmbedFieldBuilder() { Name = _states[i].NameEn, Value = _states[i].Id, IsInline= true });
+            }
+            return states;
         }
     }
 }

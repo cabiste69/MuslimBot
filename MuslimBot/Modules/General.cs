@@ -4,7 +4,7 @@ using MuslimBot.Services;
 
 namespace MuslimBot.Modules
 {
-    public class General : ModuleBase<SocketCommandContext>
+    public sealed class General : ModuleBase<SocketCommandContext>
     {
         private readonly IPrayer _prayerTime;
         public General(IPrayer prayerTime)
@@ -22,6 +22,7 @@ namespace MuslimBot.Modules
         [Alias("PrayTime", "Pray Time", "PrayerTime", "Prayer Time", "time")]
         public async Task GetPrayerTime([Remainder] string state)
         {
+            await Context.Channel.TriggerTypingAsync();
             List<EmbedFieldBuilder> response;
             try
             {
@@ -36,7 +37,7 @@ namespace MuslimBot.Modules
 
             if (response == null)
             {
-                await ReplyAsync("for some reason the response is null 🤔 \n did you type the correct state name?");
+                await ReplyAsync("for some reason the response is null 🤔 \ndid you type the correct state name?");
                 return;
             }
 
@@ -46,6 +47,21 @@ namespace MuslimBot.Modules
                 Color = Color.Green,
                 Fields = response
             }.Build()); 
+        }
+
+        [Command("states")]
+        public async Task GetAvailableStates()
+        {
+            await Context.Channel.TriggerTypingAsync();
+
+            var states = _prayerTime.GetStates();
+
+            await ReplyAsync(embed: new EmbedBuilder()
+            {
+                Title = "Available States",
+                Color = Color.Green,
+                Fields = states
+            }.Build());
         }
     }
 }
